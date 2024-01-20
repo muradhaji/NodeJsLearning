@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+<body>
+
+  <% const pageLabel="Blogs Page" ; %>
+
+  <%- include('./partials/nav.ejs') %>
+
+  <h1>
+    <%= pageLabel %>
+  </h1>
+
+  <hr>
+
+  <% if (blogs.length > 0) { %>
+    <% blogs.forEach(blog => {%>
+
+      <h3><%= blog.title %></h3>
+      <p><%= blog.content %></p>
+
+    <% });  %>
+  <% } else { %>
+
+    <h3>There is not any blog..</h3>
+
+  <% } %>
+
+</body>
+
+</html>

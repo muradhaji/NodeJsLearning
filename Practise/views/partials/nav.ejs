@@ -1,0 +1,15 @@
+<nav>
+  <% const navData=[{path: "/" , label: "Home" }, {path: "/about" , label: "About" }, {path: "/blogs" , label: "Blogs" }] %>
+  
+  <% navData.forEach(nav=> {%>
+    <% if (pageTitle == nav.label) { %>
+
+      <a class="active" href="<%= nav.path %>"><%= nav.label %></a>
+      
+    <% } else { %>
+
+      <a href="<%= nav.path %>"><%= nav.label %></a>
+
+    <% } %>
+  <% }); %>
+</nav>
