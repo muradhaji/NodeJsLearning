@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <%- include('./partials/head.ejs') %>
+  
+<body>
+  
+  <h1>NodeJs Learning</h1>
+
+  <%- include('./partials/nav.ejs') %>
+
+  <h2>Add Blog Page</h2>
+
+  <div id="single-blog">
+    <% if (blog) { %>
+  
+        <%- include('./partials/blog.ejs') %>
+
+    <% } else { %>
+
+      <h3>Empty..</h3>
+  
+    <% } %>
+  </div>
+
+</body>
+
+</html>

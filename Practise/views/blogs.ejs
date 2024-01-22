@@ -1,32 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<%- include('./partials/head.ejs') %>
-
+  
+  <%- include('./partials/head.ejs') %>
+  
 <body>
-
-  <% const pageLabel="Blogs Page" ; %>
+  
+  <h1>NodeJs Learning</h1>
 
   <%- include('./partials/nav.ejs') %>
 
-  <h1>
-    <%= pageLabel %>
-  </h1>
+  <h2>Blogs Page <span class="badge"><%= blogs.length %></span></h2>
 
-  <hr>
+  <div id="blogs">
+    <% if (blogs.length > 0) { %>
+      <% blogs.forEach((blog, index) => {%>
+  
+        <% let createdAt = new Date(blog.createdAt); %>
+        <% let updatedAt = new Date(blog.updatedAt); %>
 
-  <% if (blogs.length > 0) { %>
-    <% blogs.forEach(blog => {%>
-
-      <h3><%= blog.title %></h3>
-      <p><%= blog.content %></p>
-
-    <% });  %>
-  <% } else { %>
-
-    <h3>There is not any blog..</h3>
-
-  <% } %>
+        <div class="blog">
+          <h3 class="title"><%= blog.title %></h3>
+          <p class="snippet"><%= blog.snippet %></p>
+          <p class="body"><%= blog.body %></p>
+          <div class="timestamps">
+            <span class="createdAt"><b>Created:</b> <%= createdAt.toDateString() %> | </span>
+            <span class="updatedAt"><b>Updated:</b> <%= updatedAt.toDateString() %></span>
+          </div>
+        </div>
+  
+      <% });  %>
+    <% } else { %>
+  
+      <h3>Empty..</h3>
+  
+    <% } %>
+  </div>
 
 </body>
 

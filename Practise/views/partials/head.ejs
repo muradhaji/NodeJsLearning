@@ -1,7 +1,10 @@
+<% let titles={"/": "Home" , "/about" : "About" , "/blog" : "Blogs" , "/single-blog" : "Single Blog" , "/add-blog"
+  : "Add Blog" } %>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page | <%= pageTitle %>
+  <title>NodeJS Learning | <%= titles[path] %>
   </title>
   <link rel="stylesheet" href="css/main.css">
 </head>

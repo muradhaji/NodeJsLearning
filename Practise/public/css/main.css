@@ -2,6 +2,82 @@
   box-sizing: border-box;
 }
 
-nav > a.active {
-  text-decoration: none;
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+/* Navbar Start */
+
+nav.menu {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 3px solid #191919;
+}
+nav.menu > div.leftMenu {
+}
+nav.menu > div.rightMenu {
+}
+nav.menu a {
+  display: inline-block;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #000;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+nav.menu a.active,
+nav.menu a:hover {
+  background-color: #191919;
+  color: white;
+}
+
+/* Navbar End */
+
+/* Blogs Start */
+div#blogs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+div#blogs > div.blog,
+div#single-blog > div.blog {
+  background-color: #191919;
+  padding: 24px;
+  color: white;
+  /* border-radius: 24px; */
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+div#blogs > div.blog > h3.title {
+}
+div#blogs > div.blog > p.snippet {
+}
+div#blogs > div.blog > p.body {
+}
+div#blogs > div.blog > div.timestamps,
+div#single-blog > div.blog > div.timestamps {
+  display: flex;
+  justify-content: end;
+  gap: 8px;
+  font-size: 12px;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+div#blogs > div.blog > div.timestamps > span {
+}
+div#blogs > div.blog > div.timestamps > span.createdAt {
+}
+div#blogs > div.blog > div.timestamps > span.updatedAt {
+}
+div#blogs > div.blog > div.timestamps > span.bull {
+}
+/* Blogs End */
+
+/* Components Start */
+span.badge {
+  background-color: #191919;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0px 4px;
+}
+/* Components End */

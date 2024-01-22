@@ -1,15 +1,33 @@
 <nav>
-  <% const navData=[{path: "/" , label: "Home" }, {path: "/about" , label: "About" }, {path: "/blogs" , label: "Blogs" }] %>
-  
-  <% navData.forEach(nav=> {%>
-    <% if (pageTitle == nav.label) { %>
+  <% const navData={ left: [{path: "/" , label: "Home" }], right: [{path: "/blogs" ,
+    label: "Blogs" }, {path: '/single-blog' , label:"Single Blog"}, {path: "/add-blog" , label: "Add Blog" }, {path: "/about" , label: "About" }]} %>
 
-      <a class="active" href="<%= nav.path %>"><%= nav.label %></a>
-      
-    <% } else { %>
-
-      <a href="<%= nav.path %>"><%= nav.label %></a>
-
-    <% } %>
-  <% }); %>
+    <nav class="menu">
+      <div class="leftMenu">
+        <% navData.left.forEach(nav=> {%>
+          <% if (path==nav.path) { %>
+            <a class="active" href="<%= nav.path %>">
+              <%= nav.label %>
+            </a>
+          <% } else { %>
+            <a href="<%= nav.path %>">
+              <%= nav.label %>
+            </a>
+          <% } %>
+        <% }); %>
+      </div>
+      <div class="rightMenu">
+        <% navData.right.forEach(nav=> {%>
+          <% if (path==nav.path) { %>
+            <a class="active" href="<%= nav.path %>">
+              <%= nav.label %>
+            </a>
+          <% } else { %>
+            <a href="<%= nav.path %>">
+              <%= nav.label %>
+            </a>
+          <% } %>
+        <% }); %>
+      </div>
+    </nav>
 </nav>
