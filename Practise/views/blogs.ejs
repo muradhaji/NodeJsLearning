@@ -13,28 +13,21 @@
 
   <div id="blogs">
     <% if (blogs.length > 0) { %>
+
       <% blogs.forEach((blog, index) => {%>
   
-        <% let createdAt = new Date(blog.createdAt); %>
-        <% let updatedAt = new Date(blog.updatedAt); %>
-
-        <div class="blog">
-          <h3 class="title"><%= blog.title %></h3>
-          <p class="snippet"><%= blog.snippet %></p>
-          <p class="body"><%= blog.body %></p>
-          <div class="timestamps">
-            <span class="createdAt"><b>Created:</b> <%= createdAt.toDateString() %> | </span>
-            <span class="updatedAt"><b>Updated:</b> <%= updatedAt.toDateString() %></span>
-          </div>
-        </div>
+        <%- include('./partials/blog.ejs', { blog, isDetailedBlog: false }) %>
   
       <% });  %>
+      
     <% } else { %>
   
       <h3>Empty..</h3>
   
     <% } %>
   </div>
+
+  <%- include('./partials/scripts.ejs') %>
 
 </body>
 

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+<body>
+
+  <h1>NodeJS Learning</h1>
+
+  <%- include('./partials/nav.ejs') %>
+
+  <h2>Edit Blog Page</h2>
+
+  <div class="blogForm edit">
+    <form id="updateBlog" data-blogid="<%= blog._id %>">
+      <div class="field">
+        <div class="label">
+          <label for="title_inp">Title:</label>
+        </div>
+        <div class="input">
+          <input type="text" name="title" id="title_inp" required value="<%= blog.title %>">
+        </div>
+      </div>
+  
+      <div class="field">
+        <div class="label">
+          <label for="snippet_inp">Snippet:</label>
+        </div>
+        <div class="input">
+          <input type="text" name="snippet" id="snippet_inp" required value="<%= blog.snippet %>">
+        </div>
+      </div>
+  
+      <div class="field textarea">
+        <div class="label">
+          <label for="body_area">Body:</label>
+        </div>
+        <div class="input">
+          <textarea name="body" id="body_area" rows="5" required><%= blog.body %></textarea>
+        </div>
+      </div>
+  
+      <div class="button">
+        <button type="submit">Update Blog</button>
+      </div>
+    </form>
+  </div>
+
+  <%- include('./partials/scripts.ejs') %>
+
+</body>
+
+</html>

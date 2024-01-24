@@ -1,13 +1,47 @@
-<% let createdAt = new Date(blog.createdAt); %>
-<% let updatedAt = new Date(blog.updatedAt); %>
+<% let createdAt=new Date(blog.createdAt); %>
+<% let updatedAt=new Date(blog.updatedAt); %>
 
 <div class="blog">
-  <h3 class="title"><%= blog.title %></h3>
-  <p class="snippet"><%= blog.snippet %></p>
-  <p class="body"><%= blog.body %></p>
-  <div class="timestamps">
-    <span class="createdAt"><b>Created:</b> <%= createdAt.toDateString() %></span>
-    <span class="bull">&bull;</span>
-    <span class="updatedAt"><b>Updated:</b> <%= updatedAt.toDateString() %></span>
+  <div class="buttons">
+    <% if (isDetailedBlog) { %>
+      <a href="/blogs/edit/<%= blog._id %>" class="edit">
+        <i class="fa-regular fa-pen-to-square"></i>
+        <span class="tooltip">EDIT</span>
+      </a>
+      <a class="delete" data-blogid="<%= blog._id %>" onclick="deleteBlog()">
+        <i class="fa-regular fa-trash-can"></i>
+        <span class="tooltip">DELETE</span>
+      </a>
+    <% } else { %>
+      <a href="/blogs/<%= blog._id %>" class="details">
+        <i class="fa-solid fa-list-ul"></i>
+        <span class="tooltip">DETAILS</span>
+      </a>
+    <% } %>
   </div>
+
+  <h3 class="title"><b>Title:</b>
+    <%= blog.title %>
+  </h3>
+  <p class="snippet"><b>Snippet:</b>
+    <%= blog.snippet %>
+  </p>
+
+  <% if (isDetailedBlog) { %>
+    <p class="body"><b>Content:</b>
+      <%= blog.body %>
+    </p>
+  <% } %>
+
+  <% if (isDetailedBlog) { %>
+    <div class="timestamps">
+      <span class="createdAt"><b>Created:</b>
+        <%= createdAt.toDateString() %>
+      </span>
+      <span class="bull">&bull;</span>
+      <span class="updatedAt"><b>Updated:</b>
+        <%= updatedAt.toDateString() %>
+      </span>
+    </div>
+  <% } %>
 </div>

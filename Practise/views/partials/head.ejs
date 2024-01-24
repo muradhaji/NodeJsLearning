@@ -1,10 +1,12 @@
-<% let titles={"/": "Home" , "/about" : "About" , "/blog" : "Blogs" , "/single-blog" : "Single Blog" , "/add-blog"
-  : "Add Blog" } %>
+<% let titles={"/": "Home" , "/about" : "About" , "/blogs" : "Blogs" , "/blog/:id" : "Detailed Blog" , "/blogs/new"
+  : "New Blog" } %>
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NodeJS Learning | <%= titles[path] %>
+  <title>NodeJS Learning | <%= titles[path] || pageTitle %>
   </title>
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
+
+  <link rel="stylesheet" href="/css/main.css">
 </head>

@@ -9,12 +9,12 @@
 
   <%- include('./partials/nav.ejs') %>
 
-  <h2>Single Blog Page</h2>
+  <h2>Detailed Blog Page</h2>
 
-  <div id="single-blog">
+  <div id="detailedBlog">
     <% if (blog) { %>
   
-        <%- include('./partials/blog.ejs') %>
+        <%- include('./partials/blog.ejs', { isDetailedBlog: true }) %>
 
     <% } else { %>
 
@@ -22,6 +22,8 @@
   
     <% } %>
   </div>
+
+  <%- include('./partials/scripts.ejs') %>
 
 </body>
 

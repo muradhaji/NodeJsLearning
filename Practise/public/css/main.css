@@ -1,3 +1,8 @@
+:root {
+  --darkColor: #191919;
+  --inputBorderColor: rgba(0, 0, 0, 0.1);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -11,11 +16,7 @@ body {
 nav.menu {
   display: flex;
   justify-content: space-between;
-  border-bottom: 3px solid #191919;
-}
-nav.menu > div.leftMenu {
-}
-nav.menu > div.rightMenu {
+  border-bottom: 3px solid var(--darkColor);
 }
 nav.menu a {
   display: inline-block;
@@ -27,7 +28,7 @@ nav.menu a {
 }
 nav.menu a.active,
 nav.menu a:hover {
-  background-color: #191919;
+  background-color: var(--darkColor);
   color: white;
 }
 
@@ -39,23 +40,42 @@ div#blogs {
   flex-direction: column;
   gap: 16px;
 }
-div#blogs > div.blog,
-div#single-blog > div.blog {
-  background-color: #191919;
+div.blog {
+  background-color: var(--darkColor);
   padding: 24px;
   color: white;
-  /* border-radius: 24px; */
   border-top-right-radius: 24px;
   border-bottom-right-radius: 24px;
 }
-div#blogs > div.blog > h3.title {
+div.blog > div.buttons {
+  display: flex;
+  justify-content: end;
+  gap: 8px;
 }
-div#blogs > div.blog > p.snippet {
+div.blog > div.buttons > a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
 }
-div#blogs > div.blog > p.body {
+div.blog > div.buttons > a:hover {
+  background-color: #fff;
+  color: var(--darkColor);
 }
-div#blogs > div.blog > div.timestamps,
-div#single-blog > div.blog > div.timestamps {
+div.blog > div.buttons > a > span.tooltip {
+  display: inline-block;
+  overflow: hidden;
+  width: 0px;
+  line-height: 16px;
+}
+div.blog > div.buttons > a:hover > span.tooltip {
+  width: 100%;
+}
+div.blog > div.timestamps {
   display: flex;
   justify-content: end;
   gap: 8px;
@@ -63,21 +83,111 @@ div#single-blog > div.blog > div.timestamps {
   text-transform: uppercase;
   opacity: 0.5;
 }
-div#blogs > div.blog > div.timestamps > span {
-}
-div#blogs > div.blog > div.timestamps > span.createdAt {
-}
-div#blogs > div.blog > div.timestamps > span.updatedAt {
-}
-div#blogs > div.blog > div.timestamps > span.bull {
-}
 /* Blogs End */
+
+/* Create Blog Form Start */
+div.blogForm {
+  margin: auto;
+  width: 1400px;
+  padding: 24px;
+  box-shadow: 0px 0px 5px 3px var(--inputBorderColor);
+  border-radius: 24px;
+}
+div.blogForm > form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+div.blogForm > form > div.field {
+  display: flex;
+  border-bottom: 2px solid rgba(25, 25, 25, 0.3);
+}
+div.blogForm > form > div.field.textarea {
+  border-bottom: none;
+  border-top: 2px solid rgba(25, 25, 25, 0.3);
+}
+div.blogForm > form > div.field > div.label {
+  width: 100px;
+}
+div.blogForm > form > div.field > div.label > label {
+  font-size: 18px;
+  padding: 8px;
+  display: inline-block;
+}
+div.blogForm > form > div.field > div.input {
+  flex: 1;
+}
+div.blogForm > form > div.field > div.input > input {
+  border: none;
+}
+div.blogForm > form > div.field > div.input > textarea {
+  resize: none;
+  border: none;
+  border-bottom: 2px solid rgba(25, 25, 25, 0.3);
+}
+div.blogForm > form > div.field > div.input > input,
+div.blogForm > form > div.field > div.input > textarea {
+  outline: none;
+  font-size: 18px;
+  padding: 8px;
+  width: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+div.blogForm > form > div.button {
+  display: flex;
+  justify-content: end;
+}
+div.blogForm > form > div.button > button {
+  border: 2px solid var(--darkColor);
+  padding: 8px 36px;
+  font-size: 18px;
+  background-color: var(--darkColor);
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+}
+div.blogForm > form > div.button > button:hover {
+  background-color: transparent;
+  color: var(--darkColor);
+}
+/* Create Blog Form End */
 
 /* Components Start */
 span.badge {
-  background-color: #191919;
+  background-color: var(--darkColor);
   color: #fff;
   border-radius: 8px;
   padding: 0px 4px;
 }
 /* Components End */
+
+/* Responsive Design Start */
+@media screen and (max-width: calc(1400px + 16px)) {
+  div.blogForm {
+    width: 1200px;
+  }
+}
+@media screen and (max-width: calc(1200px + 16px)) {
+  div.blogForm {
+    width: 992px;
+  }
+}
+@media screen and (max-width: calc(992px + 16px)) {
+  div.blogForm {
+    width: 768px;
+  }
+}
+@media screen and (max-width: calc(768px + 16px)) {
+  div.blogForm {
+    width: 576px;
+  }
+}
+@media screen and (max-width: calc(576px + 16px)) {
+  div.blogForm {
+    width: calc(100% - 32px);
+  }
+  div.blogForm > form > div.field {
+    flex-direction: column;
+  }
+}
+/* Responsive Design End */
