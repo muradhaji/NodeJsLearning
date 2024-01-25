@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const _ = require('lodash');
-const blogRouter = require('./routes/blogRoutes');
+const { authRouter, blogRouter } = require('./routes');
 
 const APP_PORT = 3000;
 const DB_USER_NAME = 'muradhajiyev42';
@@ -45,6 +45,9 @@ app.use(express.static('public'));
 // Accepting form data
 app.use(express.urlencoded({ extended: true }));
 
+// Accepting json data
+app.use(express.json());
+
 // Logger middleware
 app.use(morgan('dev'));
 // Middleware End
@@ -64,6 +67,10 @@ app.get('/about', (req, res) => {
   res.render('about', { path: req.originalUrl });
 });
 // About End
+
+// Auth Routes Started
+app.use(authRouter);
+// Auth Routes End
 
 // Blog Routes Started
 app.use('/blogs', blogRouter);
