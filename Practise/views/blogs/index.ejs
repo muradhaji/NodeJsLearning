@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   
-  <%- include('./partials/head.ejs') %>
+  <%- include('../partials/head.ejs') %>
   
 <body>
   
   <h1>NodeJs Learning</h1>
 
-  <%- include('./partials/nav.ejs') %>
+  <%- include('../partials/nav.ejs') %>
 
   <h2>Blogs Page <span class="badge"><%= blogs.length %></span></h2>
 
@@ -16,7 +16,7 @@
 
       <% blogs.forEach((blog, index) => {%>
   
-        <%- include('./partials/blog.ejs', { blog, isDetailedBlog: false }) %>
+        <%- include('./blog.ejs', { blog, isDetailedBlog: false }) %>
   
       <% });  %>
       
@@ -27,7 +27,7 @@
     <% } %>
   </div>
 
-  <%- include('./partials/scripts.ejs') %>
+  <%- include('../partials/scripts.ejs') %>
 
 </body>
 

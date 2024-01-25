@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include('./partials/head.ejs') %>
+<%- include('../partials/head.ejs') %>
 
 <body>
 
   <h1>NodeJS Learning</h1>
 
-  <%- include('./partials/nav.ejs') %>
+  <%- include('../partials/nav.ejs') %>
 
-  <h2>Edit Blog Page</h2>
+  <h2>New Blog Page</h2>
 
-  <div class="blogForm edit">
-    <form id="updateBlog" data-blogid="<%= blog._id %>">
+  <div class="blogForm create">
+    <form action="/blogs" method="post">
       <div class="field">
         <div class="label">
           <label for="title_inp">Title:</label>
         </div>
         <div class="input">
-          <input type="text" name="title" id="title_inp" required value="<%= blog.title %>">
+          <input type="text" name="title" id="title_inp" required>
         </div>
       </div>
   
@@ -27,7 +27,7 @@
           <label for="snippet_inp">Snippet:</label>
         </div>
         <div class="input">
-          <input type="text" name="snippet" id="snippet_inp" required value="<%= blog.snippet %>">
+          <input type="text" name="snippet" id="snippet_inp" required>
         </div>
       </div>
   
@@ -36,17 +36,17 @@
           <label for="body_area">Body:</label>
         </div>
         <div class="input">
-          <textarea name="body" id="body_area" rows="5" required><%= blog.body %></textarea>
+          <textarea name="body" id="body_area" rows="5" required></textarea>
         </div>
       </div>
   
       <div class="button">
-        <button type="submit">Update Blog</button>
+        <button type="submit">Create Blog</button>
       </div>
     </form>
   </div>
 
-  <%- include('./partials/scripts.ejs') %>
+  <%- include('../partials/scripts.ejs') %>
 
 </body>
 
