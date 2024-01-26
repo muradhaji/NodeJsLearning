@@ -9,7 +9,35 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 24px;
 }
+
+/* Top Header Start */
+
+div.topHeader {
+  display: flex;
+  justify-content: space-between;
+}
+div.topHeader > div.authButtons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+div.topHeader > div.authButtons > a {
+  padding: 8px 16px;
+  text-decoration: none;
+  background-color: var(--darkColor);
+  border: 2px solid var(--darkColor);
+  border-radius: 8px;
+  color: white;
+}
+div.topHeader > div.authButtons > a:hover {
+  background-color: transparent;
+  color: var(--darkColor);
+}
+
+/* Top Header End */
 
 /* Navbar Start */
 
@@ -85,7 +113,7 @@ div.blog > div.timestamps {
 }
 /* Blogs End */
 
-/* Create Blog Form Start */
+/* Blog Form Start */
 div.blogForm {
   margin: auto;
   width: 1400px;
@@ -150,7 +178,7 @@ div.blogForm > form > div.button > button:hover {
   background-color: transparent;
   color: var(--darkColor);
 }
-/* Create Blog Form End */
+/* Blog Form End */
 
 /* Components Start */
 span.badge {
@@ -161,33 +189,91 @@ span.badge {
 }
 /* Components End */
 
+/* Auth Form Start */
+
+form.authForm {
+  width: 576px;
+  margin: auto;
+  padding: 24px 48px;
+  box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+form.authForm > h1 {
+  text-align: center;
+  letter-spacing: 6px;
+}
+form.authForm > div.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 20px;
+}
+form.authForm > div.field > label {
+}
+form.authForm > div.field > input {
+  font-size: inherit;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid var(--inputBorderColor);
+  padding: 8px;
+}
+form.authForm > div.button {
+  display: flex;
+  justify-content: end;
+  padding-top: 24px;
+}
+form.authForm > div.button > button {
+  border: 2px solid var(--darkColor);
+  padding: 8px 36px;
+  font-size: 20px;
+  line-height: 20px;
+  background-color: var(--darkColor);
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: 4px;
+}
+form.authForm > div.button > button:hover {
+  background-color: transparent;
+  color: var(--darkColor);
+}
+
+/* Auth Form End */
+
 /* Responsive Design Start */
-@media screen and (max-width: calc(1400px + 16px)) {
+@media screen and (max-width: calc(1400px + 48px)) {
   div.blogForm {
     width: 1200px;
   }
 }
-@media screen and (max-width: calc(1200px + 16px)) {
+@media screen and (max-width: calc(1200px + 48px)) {
   div.blogForm {
     width: 992px;
   }
 }
-@media screen and (max-width: calc(992px + 16px)) {
+@media screen and (max-width: calc(992px + 48px)) {
   div.blogForm {
     width: 768px;
   }
 }
-@media screen and (max-width: calc(768px + 16px)) {
+@media screen and (max-width: calc(768px + 48px)) {
   div.blogForm {
     width: 576px;
   }
 }
-@media screen and (max-width: calc(576px + 16px)) {
+@media screen and (max-width: calc(576px + 48px)) {
   div.blogForm {
     width: calc(100% - 32px);
   }
   div.blogForm > form > div.field {
     flex-direction: column;
+  }
+
+  form.authForm {
+    width: 100%;
   }
 }
 /* Responsive Design End */

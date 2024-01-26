@@ -17,14 +17,16 @@ const getErrMessages = (err) => {
         err.errors[key].properties;
 
       let fieldJson = {};
-      fieldJson[fieldName] = fieldMessage;
+      fieldJson['name'] = key;
+      fieldJson['message'] = fieldMessage;
 
       errMessages.fieldMessages.push(fieldJson);
     }
   } else if (err.code === 11000) {
     for (const key in err.keyValue) {
       let fieldJson = {};
-      fieldJson[key] = DUBLICATE_FIELD_MESSAGES[key];
+      fieldJson['name'] = key;
+      fieldJson['message'] = DUBLICATE_FIELD_MESSAGES[key];
 
       errMessages.fieldMessages.push(fieldJson);
     }
@@ -35,11 +37,11 @@ const getErrMessages = (err) => {
 };
 
 const signup_get = (req, res) => {
-  res.render('auth/signup');
+  res.render('auth/signup', { path: req.originalUrl });
 };
 
 const login_get = (req, res) => {
-  res.render('auth/login');
+  res.render('auth/login', { path: req.originalUrl });
 };
 
 const signup_post = async (req, res) => {
@@ -47,6 +49,7 @@ const signup_post = async (req, res) => {
 
   try {
     const user = await User.create({ email, password });
+    res.cookie('user_id', user._id);
     res.status(201).json(user);
   } catch (err) {
     console.log(err);

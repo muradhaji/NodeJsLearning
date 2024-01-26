@@ -1,3 +1,13 @@
+const errHandler = ({ message, fieldMessages }) => {
+  if (message) {
+    alert(message);
+  } else {
+    fieldMessages.forEach((field) => {
+      alert(field.message);
+    });
+  }
+};
+
 const deleteBlog = () => {
   const deleteButton = document.querySelector('a.delete');
 
@@ -38,5 +48,41 @@ if (blogUpdateForm) {
       .catch((err) => {
         console.log(err);
       });
+  });
+}
+
+const signupForm = document.querySelector('form#signupForm');
+
+if (signupForm) {
+  signupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(signupForm);
+
+    const signupData = new URLSearchParams(formData.entries());
+
+    fetch('/signup', {
+      method: 'POST',
+      body: signupData,
+    })
+      .then(async (result) => {
+        if (result.status === 400) {
+          const err = await result.json();
+          errHandler(err);
+        } else {
+          window.location = '/login';
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+}
+
+const loginForm = document.querySelector('form#loginForm');
+
+if (loginForm) {
+  loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
   });
 }

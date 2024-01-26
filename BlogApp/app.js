@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const _ = require('lodash');
+const cookieParser = require('cookie-parser');
 const { authRouter, blogRouter } = require('./routes');
 
 const APP_PORT = 3000;
@@ -50,6 +51,9 @@ app.use(express.json());
 
 // Logger middleware
 app.use(morgan('dev'));
+
+// Cookie Parser
+app.use(cookieParser());
 // Middleware End
 
 // Home Started
