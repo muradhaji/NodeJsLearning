@@ -1,12 +1,15 @@
 const { User } = require('../models');
-
-const DUBLICATE_FIELD_MESSAGES = {
-  email: 'The email address you entered has already been used!',
-};
+const jwt = require('jsonwebtoken');
+const {
+  JWT_SECRET,
+  JWT_AGE,
+  JWT_AGE_MS,
+  DUBLICATE_FIELD_MESSAGES,
+} = require('../appConstants');
 
 // Error handler
-const getErrMessages = (err) => {
-  let errMessages = {
+const getCustomErrors = (err) => {
+  let customErr = {
     message: null,
     fieldMessages: [],
   };
@@ -20,7 +23,7 @@ const getErrMessages = (err) => {
       fieldJson['name'] = key;
       fieldJson['message'] = fieldMessage;
 
-      errMessages.fieldMessages.push(fieldJson);
+      customErr.fieldMessages.push(fieldJson);
     }
   } else if (err.code === 11000) {
     for (const key in err.keyValue) {
@@ -28,12 +31,20 @@ const getErrMessages = (err) => {
       fieldJson['name'] = key;
       fieldJson['message'] = DUBLICATE_FIELD_MESSAGES[key];
 
-      errMessages.fieldMessages.push(fieldJson);
+      customErr.fieldMessages.push(fieldJson);
     }
+  } else if (err.message) {
+    customErr.message = err.message;
   } else {
-    errMessages.message = 'Something went wrong!';
+    customErr.message = 'Something went wrong!';
   }
-  return errMessages;
+  return customErr;
+};
+
+const createJWT = (id) => {
+  return jwt.sign({ id }, JWT_SECRET, {
+    expiresIn: JWT_AGE,
+  });
 };
 
 const signup_get = (req, res) => {
@@ -41,7 +52,11 @@ const signup_get = (req, res) => {
 };
 
 const login_get = (req, res) => {
-  res.render('auth/login', { path: req.originalUrl });
+  if (res.locals.user) {
+    res.redirect('/');
+  } else {
+    res.render('auth/login', { path: req.originalUrl });
+  }
 };
 
 const signup_post = async (req, res) => {
@@ -49,16 +64,30 @@ const signup_post = async (req, res) => {
 
   try {
     const user = await User.create({ email, password });
-    res.cookie('user_id', user._id);
-    res.status(201).json(user);
+    const user_jwt = createJWT(user._id);
+    res.cookie('user_jwt', user_jwt, { httpOnly: true, maxAge: JWT_AGE_MS });
+    res.status(201).json({ user: user._id });
   } catch (err) {
-    console.log(err);
-    res.status(400).json(getErrMessages(err));
+    res.status(400).json(getCustomErrors(err));
   }
 };
 
-const login_post = (req, res) => {
-  console.log(req.body);
+const login_post = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.login(email, password);
+    const user_jwt = createJWT(user._id);
+    res.cookie('user_jwt', user_jwt, { httpOnly: true, maxAge: JWT_AGE_MS });
+    res.status(200).json({ user: user._id });
+  } catch (err) {
+    res.status(400).json(getCustomErrors(err));
+  }
+};
+
+const logout_get = (req, res) => {
+  res.cookie('user_jwt', '', { maxAge: 1 });
+  res.redirect('/login');
 };
 
 module.exports = {
@@ -66,4 +95,5 @@ module.exports = {
   signup_post,
   login_get,
   login_post,
+  logout_get,
 };

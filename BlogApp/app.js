@@ -4,12 +4,14 @@ const mongoose = require('mongoose');
 const _ = require('lodash');
 const cookieParser = require('cookie-parser');
 const { authRouter, blogRouter } = require('./routes');
-
-const APP_PORT = 3000;
-const DB_USER_NAME = 'muradhajiyev42';
-const DB_USER_PASS = 'user4242';
-const DB_CLUSTER_NAME = 'node-learning';
-const URI = `mongodb+srv://${DB_USER_NAME}:${DB_USER_PASS}@nodelearning.rnzl70f.mongodb.net/${DB_CLUSTER_NAME}?retryWrites=true&w=majority`;
+const { requireAuth, checkUser } = require('./middleware/auth');
+const {
+  APP_PORT,
+  DB_USER_NAME,
+  DB_USER_PASS,
+  DB_CLUSTER_NAME,
+  URI,
+} = require('./appConstants');
 
 const app = express();
 
@@ -56,8 +58,10 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 // Middleware End
 
+app.get('*', checkUser);
+
 // Home Started
-app.get('/', (req, res) => {
+app.get('/', requireAuth, (req, res) => {
   res.render('index', { path: req.originalUrl });
 });
 
@@ -67,7 +71,7 @@ app.get('/home', (req, res) => {
 // Home End
 
 // About Started
-app.get('/about', (req, res) => {
+app.get('/about', requireAuth, (req, res) => {
   res.render('about', { path: req.originalUrl });
 });
 // About End

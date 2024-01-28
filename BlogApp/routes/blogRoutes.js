@@ -1,19 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const { blogController } = require('../controllers');
+const { requireAuth } = require('../middleware/auth');
 
-router.get('/', blogController.view_all);
+router.get('/', requireAuth, blogController.view_all);
 
-router.get('/new', blogController.view_new);
+router.get('/new', requireAuth, blogController.view_new);
 
-router.get('/edit/:blogId', blogController.view_edit);
+router.get('/edit/:blogId', requireAuth, blogController.view_edit);
 
-router.get('/:blogId', blogController.view_details);
+router.get('/:blogId', requireAuth, blogController.view_details);
 
-router.post('/', blogController.api_create);
+router.post('/', requireAuth, blogController.api_create);
 
-router.delete('/:blogId', blogController.api_delete);
+router.delete('/:blogId', requireAuth, blogController.api_delete);
 
-router.put('/:blogId', blogController.api_update);
+router.put('/:blogId', requireAuth, blogController.api_update);
 
 module.exports = router;

@@ -1,4 +1,4 @@
-const errHandler = ({ message, fieldMessages }) => {
+const handleCustomErr = ({ message, fieldMessages }) => {
   if (message) {
     alert(message);
   } else {
@@ -66,11 +66,12 @@ if (signupForm) {
       body: signupData,
     })
       .then(async (result) => {
+        const jsonData = await result.json();
         if (result.status === 400) {
-          const err = await result.json();
-          errHandler(err);
+          handleCustomErr(jsonData);
         } else {
-          window.location = '/login';
+          console.log(jsonData);
+          location.assign('/');
         }
       })
       .catch((err) => {
@@ -84,5 +85,28 @@ const loginForm = document.querySelector('form#loginForm');
 if (loginForm) {
   loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
+
+    const email = loginForm.email.value;
+    const password = loginForm.password.value;
+
+    fetch('/login', {
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(async (result) => {
+        const jsonData = await result.json();
+        if (result.status === 400) {
+          handleCustomErr(jsonData);
+        } else {
+          console.log(jsonData);
+          location.assign('/');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
 }
