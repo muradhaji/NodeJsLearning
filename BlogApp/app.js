@@ -5,13 +5,7 @@ const _ = require('lodash');
 const cookieParser = require('cookie-parser');
 const { authRouter, blogRouter } = require('./routes');
 const { requireAuth, checkUser } = require('./middleware/auth');
-const {
-  APP_PORT,
-  DB_USER_NAME,
-  DB_USER_PASS,
-  DB_CLUSTER_NAME,
-  URI,
-} = require('./appConstants');
+const { APP_PORT, URI } = require('./appConstants');
 
 const app = express();
 
@@ -52,7 +46,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Logger middleware
-app.use(morgan('dev'));
+app.use(morgan('combined'));
 
 // Cookie Parser
 app.use(cookieParser());

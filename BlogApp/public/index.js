@@ -70,7 +70,6 @@ if (signupForm) {
         if (result.status === 400) {
           handleCustomErr(jsonData);
         } else {
-          console.log(jsonData);
           location.assign('/');
         }
       })
@@ -101,7 +100,6 @@ if (loginForm) {
         if (result.status === 400) {
           handleCustomErr(jsonData);
         } else {
-          console.log(jsonData);
           location.assign('/');
         }
       })
